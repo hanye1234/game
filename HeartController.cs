@@ -5,37 +5,59 @@ using UnityEngine;
 public class HeartController : MonoBehaviour
 {
     public GameObject[] hearts;
-
+    Dictionary<int,int> HPs=new Dictionary<int,int>()
+    {
+        {0,5},
+        {1,3},
+        {2,2},
+    };
     int HP;
     int maxHP;
-    public PlayerController playercontroller;
+    public GameController gameController;
+
+    void Awake()
+    {
+
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
-        for(int i=0; i<playercontroller.health;i++){
+        HP=HPs[gameController.GameDifficulty];
+        maxHP=hearts.Length;
+        for(int i=0; i<maxHP;i++){
+            hearts[i].SetActive(false);
+        }
+        for(int i=0; i<HP;i++){
             hearts[i].SetActive(true);
         }
-        maxHP=hearts.Length;
+
+
+        
     }
 
-    public void HPminus(){
-        playercontroller.health--;
 
-        if(playercontroller.health<0)
+    public int HPminus(){
+        HP--;
+
+        if(HP<0)
         {
-            playercontroller.health=0;
+            HP=0;
         }
 
-        hearts[playercontroller.health].SetActive(false);
+        hearts[HP].SetActive(false);
+        return HP;
     }
     
-    public void HPplus(){
-        playercontroller.health++;
+    public int HPplus(){
+        HP++;
 
-        if(playercontroller.health>maxHP){
-            playercontroller.health=maxHP;
+        if(HP>maxHP){
+            HP=maxHP;
         }
 
-        hearts[playercontroller.health-1].SetActive(true);
+        hearts[HP-1].SetActive(true);
+        return HP;
     }
 }

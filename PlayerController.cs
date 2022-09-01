@@ -15,11 +15,11 @@ public class PlayerController : MonoBehaviour
     public float gravityScale = 5;
     float velocity=0;
 
-    public int health=3;
     public float combo=1;
 
     
     public HeartController heartcontroller;
+    public GameController gameController;
     
 
     //초기 값 설정
@@ -74,7 +74,11 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("obstacle"))
         {
-            heartcontroller.HPminus();
+            int currentHP=heartcontroller.HPminus();
+            if(currentHP==0)
+            {
+                gameController.Gameover();
+            }
             combo=1;
         }
 
