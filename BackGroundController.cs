@@ -9,9 +9,29 @@ public class BackGroundController : MonoBehaviour
     public int Endindex;
     public Transform[] background;
 
+    public GameController gameController;
+
+    int maxspeed=25;
+
+    void Start()
+    {
+        speed=gameController.GameSpeed;
+        maxspeed=(int)(speed*1.5f);
+
+    }
     // Update is called once per frame
     void Update()
     {
+        
+        if(speed>=maxspeed)
+        {
+            speed=maxspeed;
+        }
+        else
+        {
+            speed=speed+Time.deltaTime/5.0f;
+        }
+
         transform.Translate(new Vector3(speed, 0,0) * Time.deltaTime);
         if(background[Endindex].transform.position.x>20){
             Vector3 backSpritePos=background[Startindex].transform.position;

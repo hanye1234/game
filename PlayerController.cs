@@ -12,12 +12,11 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     public float jumpForce=20;
     public float gravity = -9.81f;
-    public float gravityScale = 5;
+    public float gravityScale = 7;
     float velocity=0;
 
     public float combo=1;
 
-    
     public HeartController heartcontroller;
     public GameController gameController;
     
@@ -26,6 +25,16 @@ public class PlayerController : MonoBehaviour
     void Awake() {
         animator=GetComponent<Animator>();
         animator.SetBool("isjump",false);
+    }
+
+    void Start()
+    {
+        isGrounded=true;
+        jumpForce=20;
+        gravity = -9.81f;
+        gravityScale = 7;
+        velocity=0;
+        combo=1;
     }
 
     void Update()
@@ -74,12 +83,21 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("obstacle"))
         {
+
             int currentHP=heartcontroller.HPminus();
+            gameController.SetGameSpeed(1);
+            combo=1;
+
+            animator.SetBool("isCrash",true);
+            other.gameObject.SetActive(false);
+            
             if(currentHP==0)
             {
                 gameController.Gameover();
             }
-            combo=1;
+            
+
+            Invoke("OffCrash",1.5f);
         }
 
         if(other.CompareTag("HPitem"))
@@ -88,6 +106,12 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
         }
         
+    }
+
+    void OffCrash()
+    {
+        gameController.ResetGameSpeed();
+        animator.SetBool("isCrash",false);
     }
 
 }

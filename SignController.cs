@@ -9,9 +9,11 @@ public class SignController : MonoBehaviour
     public GameController gameController;
     bool isGeneratePanel=true;
     float Localdistance;
-    float Totaldistance;
+    public float Totaldistance;
     int GeneratedCharaterIndex;
     public TextMeshProUGUI[] Meter_texts;
+
+    public BackGroundController backGroundController;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +33,7 @@ public class SignController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Localdistance=Localdistance+Time.deltaTime*6.6f;
+        Localdistance=Localdistance+Time.deltaTime*backGroundController.speed/1.5f;
         if(Localdistance>=100&isGeneratePanel)
         {
             Totaldistance=Totaldistance+Localdistance;
@@ -49,13 +51,11 @@ public class SignController : MonoBehaviour
             PanelCharacters[GeneratedCharaterIndex].SetActive(false);
             isGeneratePanel=true;
         }
-        transform.Translate(new Vector3(gameController.GameSpeed, 0,0) * Time.deltaTime);
+        transform.Translate(new Vector3(backGroundController.speed, 0,0) * Time.deltaTime);
     }
 
     void GeneratePanelCharaters(int idx)
     {
         PanelCharacters[idx].SetActive(true);
-        Debug.Log(idx);
-
     }
 }
