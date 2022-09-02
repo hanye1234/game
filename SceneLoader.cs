@@ -14,6 +14,7 @@ public class SceneLoader : MonoBehaviour
 
     void Start() 
     {   
+        float bargage=0;
         loadingOperation = SceneManager.LoadSceneAsync(sceneToLoad);
         loadingOperation.allowSceneActivation = false;
 
