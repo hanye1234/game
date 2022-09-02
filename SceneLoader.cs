@@ -10,22 +10,21 @@ public class SceneLoader : MonoBehaviour
     AsyncOperation loadingOperation;
     public Scrollbar runcharacter;
 
-    float bargage=0;
+    float bargage;
 
     void Start() 
     {   
-        float bargage=0;
-        loadingOperation = SceneManager.LoadSceneAsync(sceneToLoad);
+        bargage=0;
+        loadingOperation = SceneManager.LoadSceneAsync("MainScene");
         loadingOperation.allowSceneActivation = false;
-
-        
     }
+
     void Update()
     {
         
         if(bargage<1)
         {
-            bargage+=Time.deltaTime/2.0f;
+            bargage+=Time.unscaledDeltaTime/2.0f;
         }
         else
         {
@@ -41,8 +40,8 @@ public class SceneLoader : MonoBehaviour
         }
         if(bargage==1)
         {
-            StartCoroutine(delayloadTime(1));
-            
+            bargage=0;
+            StartCoroutine(delayloadTime(3));
         }
         
 
@@ -50,7 +49,7 @@ public class SceneLoader : MonoBehaviour
 
     IEnumerator delayloadTime(float t)
     {
-        yield return new WaitForSeconds(t);
+        yield return new WaitForSecondsRealtime(t);
         loadingOperation.allowSceneActivation = true;
     }
 

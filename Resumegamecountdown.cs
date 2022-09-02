@@ -42,7 +42,6 @@ public class Resumegamecountdown : MonoBehaviour
         if(stoptime>4)
         {
             isStopnow=false;
-            Time.timeScale=1;
             mytext.text=(3).ToString();
             gameObject.SetActive(false);
         }

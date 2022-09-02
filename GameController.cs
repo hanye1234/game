@@ -65,7 +65,24 @@ public class GameController : MonoBehaviour
     public void ResumeGame()
     {
         countdown.SetActive(true);
+        StartCoroutine(TimeStart(4));
         Invoke("PauseButtonDisplay",0.1f);
+    }
+
+    public void TimeStop()
+    {
+        Time.timeScale=0;
+    }
+
+    // public void TimeStart()
+    // {
+    //     Time.timeScale=1;
+    // }
+    IEnumerator TimeStart(int t)
+    {
+        yield return new WaitForSecondsRealtime(t);
+        Time.timeScale=1;
+        countdown.SetActive(false);
     }
 
     void PauseButtonDisplay()
