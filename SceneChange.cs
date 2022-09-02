@@ -12,7 +12,7 @@ public class SceneChange : MonoBehaviour
     {
         GameDifficulty=dif;
         PlayerPrefs.SetInt("GameDifficulty",GameDifficulty);
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("Load");
     }
     public void totitle()
     {
