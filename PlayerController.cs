@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         isGrounded=true;
         jumpForce=20;
         gravity = -9.81f;
-        gravityScale = 7;
+        gravityScale = 6;
         velocity=0;
         combo=1;
     }
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // 스페이스바 입력이 되었을 때 속도를 jumpForce로 한다
-        if (Input.GetKeyDown(KeyCode.Space) && !animator.GetBool("isjump"))
+        if ((Input.GetKeyDown(KeyCode.Space) | Input.GetMouseButtonDown(0)) && !animator.GetBool("isjump"))
         {
             animator.SetBool("isjump",true);
             velocity = jumpForce;

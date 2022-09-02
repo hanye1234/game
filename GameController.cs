@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour
 
 
     void Awake() {
-        Screen.SetResolution(1280,720,true);
+        // Screen.SetResolution(1280,720,true);
         GameDifficulty=PlayerPrefs.GetInt("GameDifficulty");
         HighScore=PlayerPrefs.GetInt((gameSettingValue.GetModeName(GameDifficulty))+"HighScorePoint");
         HighScoreMeter=PlayerPrefs.GetInt((gameSettingValue.GetModeName(GameDifficulty))+"HighScoreMeter");

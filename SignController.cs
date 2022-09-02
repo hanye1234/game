@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class SignController : MonoBehaviour
 {
@@ -40,10 +41,20 @@ public class SignController : MonoBehaviour
             Localdistance=0;
             Vector3 POS =transform.position;
             transform.position=new Vector3(-10,POS.y,POS.z);
-            GeneratedCharaterIndex=Random.Range(0,PanelCharacters.Length);
+            GeneratedCharaterIndex=UnityEngine.Random.Range(0,PanelCharacters.Length);
             GeneratePanelCharaters(GeneratedCharaterIndex);
             TextMeshProUGUI mytext=Meter_texts[GeneratedCharaterIndex];
-            mytext.text=((int)Totaldistance).ToString();
+
+            if(Totaldistance>=1000)
+            {
+                mytext.text=((Math.Round(Totaldistance/1000.0f,1)).ToString())+"km";
+            }
+            else
+            {
+                mytext.text=(((int)Totaldistance).ToString())+"m";
+            }
+
+            
             isGeneratePanel=false;
         }
         if(Localdistance>=20 & isGeneratePanel==false)
