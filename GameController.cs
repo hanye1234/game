@@ -16,6 +16,11 @@ public class GameController : MonoBehaviour
     public ScoreController scoreController;
     public BackGroundController[] background;
     public SignController signController;
+    public Camera maincamera;
+    public CanvasScaler maincanvas;
+
+    float currentScreenWidth;
+    float currentScreenHeight;
 
     class GameSettingValue{
 
@@ -48,12 +53,24 @@ public class GameController : MonoBehaviour
         HighScore=PlayerPrefs.GetInt((gameSettingValue.GetModeName(GameDifficulty))+"HighScorePoint");
         HighScoreMeter=PlayerPrefs.GetInt((gameSettingValue.GetModeName(GameDifficulty))+"HighScoreMeter");
         GameSpeed=gameSettingValue.GetGameSpeed(GameDifficulty);
+        currentScreenWidth=(float)Screen.width;
+        currentScreenHeight=(float)Screen.height;
+
+
     }
 
     void Start()
     {
         PauseGame();
         ResumeGame();
+    }
+
+    private void Update() {
+        if(currentScreenHeight>currentScreenWidth)
+        {
+            maincamera.orthographicSize=16;
+            maincanvas.matchWidthOrHeight=0;
+        }
     }
 
     public void PauseGame()
