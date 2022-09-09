@@ -25,7 +25,7 @@ public class TitleGameStartEffectController : MonoBehaviour
         }
         velocity+=Time.deltaTime;
 
-        if(effecttimetemp>5 & iseffect)
+        if(effecttimetemp>5 && iseffect)
         {
             for(int i=0;i<characters.Length;i++)
             {

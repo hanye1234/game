@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
         ////////             점프 하는 코드              //////
         // y값 참조해서 0.8보다 작거나 같고, 아래로 떨어지고 있으면 땅에 있음을 true로 한다
-        if(transform.position.y<=-0.8 && velocity<=0){
+        if(transform.position.y<=-1.2 && velocity<=0){
             isGrounded=true;
         }
         //아니면 false
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // 스페이스바 입력이 되었을 때 속도를 jumpForce로 한다
-        if ((Input.GetKeyDown(KeyCode.Space) | Input.GetMouseButtonDown(0)) && !animator.GetBool("isjump"))
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && !animator.GetBool("isjump"))
         {
             animator.SetBool("isjump",true);
             velocity = jumpForce;
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isCrash",true);
             other.gameObject.SetActive(false);
             
-            if(currentHP==0)
+            if(currentHP==10)
             {
                 gameController.Gameover();
             }

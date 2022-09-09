@@ -164,7 +164,7 @@ public class GameController : MonoBehaviour
     {
         for(int i=0;i<background.Length;i++)
             {
-                background[i].speed=GameSpeed;
+                background[i].speed=GameSpeed*background[i].initialspeed;
             }
             
     }
@@ -173,7 +173,7 @@ public class GameController : MonoBehaviour
     {
         for(int i=0;i<background.Length;i++)
             {
-                background[i].speed=Speed;
+                background[i].speed=Speed*background[i].initialspeed;
             }
     }
 

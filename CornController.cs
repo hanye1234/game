@@ -5,35 +5,43 @@ using UnityEngine;
 public class CornController : MonoBehaviour
 {
     public GameObject[] corns;
-    public Transform background;
+    int randomidx;
 
-    bool isGeneratecorn=true;
+    // bool isGeneratecorn=true;
 
     void Start()
     {
-        for(int i=0; i<corns.Length;i++){
-            corns[i].SetActive(false);
-        }
+
+    }
+
+    void OnEnable()
+    {
+        Generatecorn();
     }
 
     void Update()
     {   
-        if(background.position.x<=-39 & isGeneratecorn){
-            isGeneratecorn=false;
-            Generatecorn();
-        }
-        if(background.position.x>=18 & !isGeneratecorn)
-        {
-            isGeneratecorn=true;
+        // if(background.position.x<=-39 & isGeneratecorn){
+        //     isGeneratecorn=false;
+        //     Generatecorn();
+        // }
+        // if(background.position.x>=18 & !isGeneratecorn)
+        // {
+        //     isGeneratecorn=true;
 
-            for(int i=0; i<corns.Length;i++){
-            corns[i].SetActive(false);
-            }
-        }
+        //     for(int i=0; i<corns.Length;i++){
+        //     corns[i].SetActive(false);
+        //     }
+        // }
+    }
+
+    void OnDisable()
+    {
+        corns[randomidx].SetActive(false);    
     }
 
     void Generatecorn(){
-        int randomidx=Random.Range(0,corns.Length);
+        randomidx=Random.Range(0,corns.Length);
         corns[randomidx].SetActive(true);
     }
 }
