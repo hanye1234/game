@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isCrash",true);
             other.gameObject.SetActive(false);
             
-            if(currentHP==10)
+            if(currentHP==0)
             {
                 gameController.Gameover();
             }

@@ -81,11 +81,11 @@ public class GameController : MonoBehaviour
     }
 
     private void Update() {
-        if(currentScreenHeight>currentScreenWidth)
-        {
-            maincamera.orthographicSize=16;
-            maincanvas.matchWidthOrHeight=0;
-        }
+        // if(currentScreenHeight>currentScreenWidth)
+        // {
+        //     maincamera.orthographicSize=16;
+        //     maincanvas.matchWidthOrHeight=0;
+        // }
     }
 
     public void PauseGame()
