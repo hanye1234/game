@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public float gravity = -9.81f;
     public float gravityScale = 7;
     float velocity=0;
+    bool isjump2=false;
 
     public float combo=1;
 
@@ -58,13 +59,21 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && velocity < 0)
         {   
             animator.SetBool("isjump",false);
+            isjump2=false;
             velocity = 0;
         }
 
         // 스페이스바 입력이 되었을 때 속도를 jumpForce로 한다
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && !animator.GetBool("isjump"))
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && !isjump2)
         {
-            animator.SetBool("isjump",true);
+            if(!animator.GetBool("isjump"))
+            {
+                animator.SetBool("isjump",true);
+            }
+            else
+            {
+                isjump2=true;
+            }
             velocity = jumpForce;
             
             gameController.PlaySoundEffect("Jump");

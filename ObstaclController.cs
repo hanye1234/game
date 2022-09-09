@@ -8,8 +8,8 @@ public class ObstaclController : MonoBehaviour
     public GameObject background;
     public BackGroundController Obstacleback;
     bool isGeneratecorn=true;
-    int cornidx=1;
-    int disableidx=100;
+    int cornidx=4;
+    int randtemp=3;
     List<int> ActiveObstacles=new List<int>(){};
 
     // Start is called before the first frame update
@@ -25,10 +25,15 @@ public class ObstaclController : MonoBehaviour
     {
         if(isGeneratecorn)
         {
-            int randomidx=Random.Range(3,5);
+            int randomidx=Random.Range(2,5);
+            if(randomidx+randtemp<=4)
+            {
+                randomidx=Random.Range(3,5);
+            }
             int idx=(cornidx+randomidx) % Obstacles.Length;
             Obstacles[idx].SetActive(true);
             cornidx=idx;
+            randtemp=randomidx;
             isGeneratecorn=false;
         }
 

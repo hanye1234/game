@@ -40,7 +40,7 @@ public class SignController : MonoBehaviour
             Totaldistance=Totaldistance+Localdistance;
             Localdistance=0;
             Vector3 POS =transform.position;
-            transform.position=new Vector3(-10,POS.y,POS.z);
+            transform.position=new Vector3(-30,POS.y,POS.z);
             GeneratedCharaterIndex=UnityEngine.Random.Range(0,PanelCharacters.Length);
             GeneratePanelCharaters(GeneratedCharaterIndex);
             TextMeshProUGUI mytext=Meter_texts[GeneratedCharaterIndex];
@@ -57,7 +57,7 @@ public class SignController : MonoBehaviour
             
             isGeneratePanel=false;
         }
-        if(Localdistance>=20 & isGeneratePanel==false)
+        if(Localdistance>=50 & isGeneratePanel==false)
         {
             PanelCharacters[GeneratedCharaterIndex].SetActive(false);
             isGeneratePanel=true;
