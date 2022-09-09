@@ -66,6 +66,8 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("isjump",true);
             velocity = jumpForce;
+            
+            gameController.PlaySoundEffect("Jump");
         }
 
         // 속도*시간만큼 움직인다
@@ -83,11 +85,13 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("obstacle"))
         {
+            gameController.PlaySoundEffect("Damaged");
 
             int currentHP=heartcontroller.HPminus();
             gameController.SetGameSpeed(1);
             combo=1;
 
+            
             animator.SetBool("isCrash",true);
             other.gameObject.SetActive(false);
             

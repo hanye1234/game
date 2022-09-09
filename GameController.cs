@@ -18,6 +18,9 @@ public class GameController : MonoBehaviour
     public SignController signController;
     public Camera maincamera;
     public CanvasScaler maincanvas;
+    public AudioClip[] soundeffects;
+    public AudioSource SEaudioSource;
+    public AudioSource BGMaudioSource;
 
     float currentScreenWidth;
     float currentScreenHeight;
@@ -27,6 +30,12 @@ public class GameController : MonoBehaviour
         List<string> PlayerCharacterList = new List<string>() { "Mayu", "Amamiya", "Luca"};
         List<int> GameSpeedList=new List<int>(){10,14,18};
         List<string> GameModeNameList=new List<string>{"Easy","Normal","Hard"};
+        Dictionary<string, int> SoundDictionary=new Dictionary<string,int>()
+        {
+            {"Jump",0},
+            {"Damaged",1},
+            {"Countdown",2}
+        };
 
         public string GetPlayerCharacterName(int CharIdx)
         {
@@ -41,6 +50,11 @@ public class GameController : MonoBehaviour
         public string GetModeName(int Difficulty)
         {
             return GameModeNameList[Difficulty];
+        }
+
+        public int GetSoundNametoIndex(string Name)
+        {
+            return SoundDictionary[Name];
         }
     }
 
@@ -63,6 +77,7 @@ public class GameController : MonoBehaviour
     {
         PauseGame();
         ResumeGame();
+        
     }
 
     private void Update() {
@@ -82,6 +97,7 @@ public class GameController : MonoBehaviour
     public void ResumeGame()
     {
         countdown.SetActive(true);
+        PlaySoundEffect("Countdown");
         StartCoroutine(TimeStart(4));
         Invoke("PauseButtonDisplay",0.1f);
     }
@@ -160,4 +176,21 @@ public class GameController : MonoBehaviour
                 background[i].speed=Speed;
             }
     }
+
+    public void PlaySoundEffect(string soundName)
+    {
+        int Soundindex=gameSettingValue.GetSoundNametoIndex(soundName);
+        SEaudioSource.PlayOneShot(soundeffects[Soundindex]);
+    }
+
+    public void PlayBackGroundMusic()
+    {
+        BGMaudioSource.Play();
+    }
+
+    public void StopBGM()
+    {}
+
+    public void ClearAudioSource()
+    {}
 }

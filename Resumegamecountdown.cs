@@ -17,8 +17,6 @@ public class Resumegamecountdown : MonoBehaviour
     void OnEnable() {
         stoptime=0;
         count=0;
-        isStopnow=true;
-        
     }
     // Update is called once per frame
     void Update()
@@ -41,7 +39,6 @@ public class Resumegamecountdown : MonoBehaviour
         }
         if(stoptime>4)
         {
-            isStopnow=false;
             mytext.text=(3).ToString();
             gameObject.SetActive(false);
         }
