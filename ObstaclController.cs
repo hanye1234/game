@@ -8,7 +8,7 @@ public class ObstaclController : MonoBehaviour
     public GameObject background;
     public BackGroundController Obstacleback;
     bool isGeneratecorn=true;
-    int cornidx=4;
+    int cornidx=6;
     int randtemp=3;
     List<int> ActiveObstacles=new List<int>(){};
 
@@ -25,7 +25,7 @@ public class ObstaclController : MonoBehaviour
     {
         if(isGeneratecorn)
         {
-            int randomidx=Random.Range(2,5);
+            int randomidx=Random.Range(3,5);
             if(randomidx+randtemp<=4)
             {
                 randomidx=Random.Range(3,5);
