@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     public float jumpForce=20;
     public float gravity = -9.81f;
     public float gravityScale = 7;
+    public Transform groundtransform;
+    public PolygonCollider2D[] SelfColliders;
+    public int ColliderIndexDisplayed;
+    int ColliderIndexNow;
     float velocity=0;
     bool isjump2=false;
 
@@ -36,6 +40,8 @@ public class PlayerController : MonoBehaviour
         gravityScale = 6;
         velocity=0;
         combo=1;
+
+        SelfColliders[0].enabled=false;
     }
 
     void Update()
@@ -43,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
         ////////             점프 하는 코드              //////
         // y값 참조해서 0.8보다 작거나 같고, 아래로 떨어지고 있으면 땅에 있음을 true로 한다
-        if(transform.position.y<=-1.2 && velocity<=0){
+        if(transform.position.y<=groundtransform.position.y && velocity<=0){
             isGrounded=true;
         }
         //아니면 false
@@ -90,6 +96,15 @@ public class PlayerController : MonoBehaviour
         else{
             combo=100;
         }
+
+
+        //collider 처리
+        if(ColliderIndexDisplayed!=ColliderIndexNow)
+        {
+            ControlPolygonCollider2D(ColliderIndexDisplayed);
+            ColliderIndexNow=ColliderIndexDisplayed;
+        }
+
     }
     void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("obstacle"))
@@ -104,7 +119,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isCrash",true);
             other.gameObject.SetActive(false);
             
-            if(currentHP==0)
+            if(currentHP==110)
             {
                 gameController.Gameover();
             }
@@ -125,6 +140,13 @@ public class PlayerController : MonoBehaviour
     {
         gameController.ResetGameSpeed();
         animator.SetBool("isCrash",false);
+    }
+
+
+    public void ControlPolygonCollider2D(int index)
+    {
+        SelfColliders[index].enabled=true;
+        SelfColliders[ColliderIndexNow].enabled=false;
     }
 
 }
