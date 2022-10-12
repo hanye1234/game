@@ -41,7 +41,7 @@ public class SceneLoader : MonoBehaviour
         if(bargage==1)
         {
             bargage=0;
-            StartCoroutine(delayloadTime(3));
+            StartCoroutine(delayloadTime(2));
         }
         
 

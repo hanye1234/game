@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
     public int ColliderIndexDisplayed;
     int ColliderIndexNow;
     float velocity=0;
-    bool isjump2=false;
 
     public float combo=1;
 
@@ -45,8 +44,10 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
-    {
-
+    {   
+        Vector3 temp=transform.position;
+        temp.x = 3;
+        transform.position=temp;
         ////////             점프 하는 코드              //////
         // y값 참조해서 0.8보다 작거나 같고, 아래로 떨어지고 있으면 땅에 있음을 true로 한다
         if(transform.position.y<=groundtransform.position.y && velocity<=0){
@@ -65,12 +66,12 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && velocity < 0)
         {   
             animator.SetBool("isjump",false);
-            isjump2=false;
+            animator.SetBool("isjump2",false);
             velocity = 0;
         }
 
         // 스페이스바 입력이 되었을 때 속도를 jumpForce로 한다
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && !isjump2)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && !animator.GetBool("isjump2"))
         {
             if(!animator.GetBool("isjump"))
             {
@@ -78,7 +79,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                isjump2=true;
+                animator.SetBool("isjump2",true);
             }
             velocity = jumpForce;
             
@@ -119,7 +120,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isCrash",true);
             other.gameObject.SetActive(false);
             
-            if(currentHP==110)
+            if(currentHP==0)
             {
                 gameController.Gameover();
             }
